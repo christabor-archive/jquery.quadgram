@@ -1,0 +1,34 @@
+{
+  "name": "jquery.quadgram",
+  "title": "jquery.quadgram",
+  "description": "Generate quadrant digrams with ease.",
+  "keywords": [
+    "jquery.quadgram"
+  ],
+  "version": "0.1.0",
+  "author": {
+    "name": "Chris Tabor",
+    "email": "dxdstudio@gmail.com",
+    "url": "https://github.com/christabor"
+  },
+  "maintainers": [
+    {
+      "name": "jquery.quadgram",
+      "email": "dxdstudio@gmail.com",
+      "url": "https://github.com/christabor"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://christabor.mit-license.org/"
+    }
+  ],
+  "bugs": "https://github.com/christabor/jquery.quadgram/issues",
+  "homepage": "http://github.com/christabor/jquery.quadgram",
+  "docs": "https://github.com/christabor/jquery.quadgram#readme",
+  "download": "https://github.com/christabor/jquery.quadgram/archive/master.zip",
+  "dependencies": {
+    "jquery": ">=1.4"
+  }
+}

@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+	<title>jquery.quadgram</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="dist/jquery.quadgram.min.css">
+	<style>
+		/* Custom styling / overrides */
+		.custom {
+			-webkit-transition: all .25s ease-in-out;
+			-moz-transition: all .25s ease-in-out;
+			-ms-transition: all .25s ease-in-out;
+			-o-transition: all .25s ease-in-out;
+			transition: all .25s ease-in-out;
+		}
+		#diagram {
+			margin: 3em 0;
+		}
+		.list-unstyled li {
+			margin: 0.5em 0 0.5em 1em;
+		}
+		.custom.jq-quadgram-diagram > .jq-quadgram-quadrant {
+			height: 240px;
+		}
+		.custom.jq-quadgram-diagram > .jq-quadgram-quadrant .key {
+			font-size: 14px;
+			text-transform: uppercase;
+		}
+		.custom.jq-quadgram-diagram > .jq-quadgram-quadrant .combo {
+			font-size: 40px;
+			font-weight: 200;
+			color: #D62348;
+		}
+		.custom.jq-quadgram-diagram > .jq-quadgram-quadrant:hover {
+			background-color: rgba(0, 0, 0, 0.1);
+		}
+		.custom.jq-quadgram-diagram > .jq-quadgram-quadrant .combo:hover {
+			font-size: 50px;
+		}
+		@media screen and (max-width: 480px) {
+			.custom.jq-quadgram-diagram > .jq-quadgram-quadrant .combo,
+			.custom.jq-quadgram-diagram > .jq-quadgram-quadrant .combo:hover {
+				font-size: 20px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="text-center">
+					Quadrant diagram maker <br>
+					<small>A classic diagram that combines 4 quadrants to demonstrate strengths/trade-offs</small>
+				</h1>
+				<ul id="diagram" class="custom clearfix"></ul>
+				<div class="text-center well">
+					<form id="demo" class="text-center form-inline">
+						<fieldset>
+							<legend>Enter a label for each quadrant below</legend>
+							<label>
+								q1
+								<input type="text" class="form-control" placeholder="...">
+							</label>
+							<label>
+								q2
+								<input type="text" class="form-control" placeholder="...">
+							</label>
+							<label>
+								q3
+								<input type="text" class="form-control" placeholder="...">
+							</label>
+							<label>
+								q4
+								<input type="text" class="form-control" placeholder="...">
+							</label>
+
+						</fieldset>
+					</form>
+					<br>
+					<a href="#" id="disable" class="btn btn-sm btn-warning">Disable custom styles</a>
+				</div>
+				<h3>Usage</h3>
+				<ol>
+					<li><strong>Embed the css: </strong> <code>&lt;link rel="stylesheet" href="jquery.quadgram.min.css"&gt;</code></li>
+					<li><strong>Embed the js: </strong> <code>&lt;script src="jquery.quadgram.min.js"&gt;&lt;script&gt;</code></li>
+					<li>
+						<strong>Call the plugin</strong>
+						<br>
+						<code>
+							// Works on ul, and ol. <br>
+							$('ul').quadrant({<br>
+							&nbsp;&nbsp;q1: {label: 'slow'},<br>
+							&nbsp;&nbsp;q2: {label: 'weak'},<br>
+							&nbsp;&nbsp;q3: {label: 'strong'},<br>
+							&nbsp;&nbsp;q4: {label: 'fast'}<br>
+						});
+					</code>
+				</li>
+			</ol>
+			<h3>Usage options</h3>
+			{
+			<ul class="list-unstyled">
+				<li>
+					<span class="label label-danger">required</span>
+					<strong>q1, q2, q3, q4 [object]</strong>: an object with configuration for quadrant 1
+					<br>
+					{
+					<ul class="list-unstyled">
+						<li>
+							<span class="label label-danger">required</span>
+							<strong>label [string]</strong>: the label to use for this quadrant.
+						</li>
+						<li>
+							<span class="label label-default">optional</span>
+							<strong>fn [function]</strong>: an optional callback to allow custom label combination for a given quadrant (e.g. foo + bar, foo &amp; bar). <em>note: you can use single alternate text for this quadrant by just returning a string.</em>
+						</li>
+					</ul>
+				}
+			</li>
+		</ul>
+	}
+	<h3>Styling/overrides</h3>
+	<p>Styling is as vanilla as possible, so you'll want to customize to your needs (placement, font-size, width/height specifically); see the source and css for what classes are available. Each quadrant has a custom class applied as well: <code>.jq-quadgram-q1, etc...</code></p>
+	<hr>
+	<p class="text-center copyright">
+		&copy; Copyright 2015 Chris Tabor. <br class="visible-xs"> See repo and LICENSE for details.
+	</p>
+</div>
+</div>
+</div>
+
+<!-- VENDOR -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
+<script src="dist/jquery.quadgram.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#diagram').quadrants({
+			q1: {
+				fn: function(one, two) {
+					return 'humanoid';
+				},
+				label: 'slow'
+			},
+			q2: {
+				fn: function(one, two) {
+					return 'flash';
+				},
+				label: 'weak'
+			},
+			q3: {
+				fn: function(one, two) {
+					return 'hulk';
+				},
+				label: 'strong'
+			},
+			q4: {
+				fn: function() {
+					return 'superman';
+				},
+				label: 'fast'
+			}
+		});
+
+		$('#demo').find('input').on('keypress keyup keydown', function(e){
+			$('#diagram').quadrants({
+				q1: {label: $('#demo').find('input').eq(0).val()},
+				q2: {label: $('#demo').find('input').eq(1).val()},
+				q3: {label: $('#demo').find('input').eq(2).val()},
+				q4: {label: $('#demo').find('input').eq(3).val()}
+			});
+		});
+		$('#disable').on('click', function(e){
+			e.preventDefault();
+			$('#diagram').toggleClass('custom');
+		});
+	});
+</script>
+</body>
+</html>
